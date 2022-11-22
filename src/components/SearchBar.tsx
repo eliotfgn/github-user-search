@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import search from '../assets/icon-search.svg'
+import {getUser} from "../utils/user-search-utils";
+import {IUser} from "../utils/IUser";
 
-const SearchBar = () =>{
+const SearchBar = (props: { user: IUser }) =>{
 
   const [mode, setMode] = useState("dark");
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,7 +19,12 @@ const SearchBar = () =>{
                //props.searchTerm = searchTerm;
              }
       }/>
-      <button className={"bg-indigo-600 px-2 rounded h-full text-[15px]"}>Search</button>
+      <button className={"bg-indigo-600 px-2 rounded h-full text-[15px]"} onClick={() => {
+        getUser(searchTerm).then(r => {
+          props.user = r;
+        });
+      }
+      }>Search</button>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import './App.css';
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import UserContent from "./components/UserContent";
+import {getUser} from "./utils/user-search-utils";
 
 const App = () => {
 
