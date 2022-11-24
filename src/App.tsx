@@ -1,14 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import moon from "./assets/icon-moon.svg";
 import './App.css';
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import UserContent from "./components/UserContent";
 import {getUser} from "./utils/user-search-utils";
+import {IUser} from "./utils/IUser";
 
 const App = () => {
 
   const [mode, setMode] = useState("dark");
+  const [user, setUser] = useState<IUser>();
+
+  useEffect(() => {
+    return () => {
+      getUser('octocat').then((data) => {
+        setUser(data);
+      })
+    };
+  }, []);
+
 
   return (
       <div className="h-[100vh] flex w-full bg-gray-900 text-white">
@@ -17,10 +28,10 @@ const App = () => {
             <Header/>
           </div>
           <div>
-            <SearchBar/>
+            <SearchBar user={user} setUser={setUser}/>
           </div>
           <div className={"w-full h-full bg-gray-800 rounded-md p-5"}>
-            <UserContent/>
+            {user && <UserContent user={user}/>}
           </div>
         </div>
       </div>

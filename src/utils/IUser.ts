@@ -9,4 +9,6 @@ export interface IUser {
   twitter_username?: string | null;
   website: string | null;
   company: string | null;
+  avatar_url: string | null;
+  username: string | null;
 }

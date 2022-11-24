@@ -3,7 +3,7 @@ import search from '../assets/icon-search.svg'
 import {getUser} from "../utils/user-search-utils";
 import {IUser} from "../utils/IUser";
 
-const SearchBar = (props: { user: IUser }) =>{
+const SearchBar = (props: { user: any, setUser: any }) =>{
 
   const [mode, setMode] = useState("dark");
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,12 +16,13 @@ const SearchBar = (props: { user: IUser }) =>{
              placeholder="Search Github username..."
              onChange={ (event) => {
                setSearchTerm(event.target.value);
-               //props.searchTerm = searchTerm;
+               
+               //props.user = searchTerm;
              }
       }/>
       <button className={"bg-indigo-600 px-2 rounded h-full text-[15px]"} onClick={() => {
         getUser(searchTerm).then(r => {
-          props.user = r;
+          props.setUser(r);
         });
       }
       }>Search</button>
