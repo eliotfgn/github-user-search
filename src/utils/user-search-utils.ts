@@ -14,7 +14,7 @@ export async function getUser(username: string) {
   let userInformation : IUser;
   return await fetchUser(username).then((data) => {
     console.log(data.data)
-    let private_repos = data.data.total_private_repos ? data.data.total_private_repos : 0;
+    let private_repos = data.data.total_private_repos ?? 0;
     userInformation = {
       name: data.data.name,
       bio: data.data.bio,
